@@ -1,0 +1,10 @@
+[Unit]
+Description=Periodically pull auction data 
+
+[Service]
+Type=simple
+User=amas
+ExecStart=
+
+[Install]
+WantedBy=multi-user.target

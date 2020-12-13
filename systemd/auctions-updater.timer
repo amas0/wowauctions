@@ -1,0 +1,8 @@
+[Unit]
+Description=Periodically run the AH update
+
+[Timer]
+OnCalendar=*-*-* *:00:00
+
+[Install]
+WantedBy=multi-user.target
