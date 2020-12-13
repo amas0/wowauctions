@@ -38,7 +38,7 @@ def api_response_to_auction(response: dict, item: Item):
 
 def get_auctions_from_api(wowapi: WowApi, auction_db: db.AuctionDB, realm_id=TICHONDRIUS_ID) -> list[Auction]:
     api_response = wowapi.get_auctions(region='us', namespace='dynamic-us', connected_realm_id=realm_id)
-    auction_response = api_response.get('wowauctions', [])
+    auction_response = api_response.get('auctions', [])
     item_ids = {int(auction_dict.get('item').get('id')) for auction_dict in auction_response}
     item_dict = {}
     for item_id in item_ids:
