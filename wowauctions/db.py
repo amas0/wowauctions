@@ -130,7 +130,7 @@ class AuctionDB:
         if (pull_id := self.get_pull_id_by_datetime(dt)) is None:
             pull_id = self.insert_pull(dt)
         if self.get_auction_by_id_pull(auction.id, pull_id) is None:
-            self.cursor.execute("INSERT INTO wowauctions VALUES (?, ?, ?, ?, ?, ?, ?)",
+            self.cursor.execute("INSERT INTO auctions VALUES (?, ?, ?, ?, ?, ?, ?)",
                                 (auction.id, pull_id, auction.item.id,
                                  auction.quantity, auction.unit_price, auction.buyout,
                                  auction.time_left_key))
@@ -147,10 +147,10 @@ class AuctionDB:
             params = [(auction.id, pull_id, auction.item.id, auction.quantity,
                        auction.unit_price, auction.buyout, auction.time_left_key)
                       for auction in new_auctions]
-            self.cursor.executemany("INSERT INTO wowauctions VALUES (?, ?, ?, ?, ?, ?, ?)", params)
+            self.cursor.executemany("INSERT INTO auctions VALUES (?, ?, ?, ?, ?, ?, ?)", params)
 
     def get_auction_by_id_pull(self, auction_id: int, pull_id: int):
-        self.cursor.execute("SELECT * FROM wowauctions WHERE id = ? AND pull_id = ?",
+        self.cursor.execute("SELECT * FROM auctions WHERE id = ? AND pull_id = ?",
                             (auction_id, pull_id))
         if db_response := self.cursor.fetchone():
             return Auction(id=db_response[0], item=self.get_item_by_id(db_response[2]),
