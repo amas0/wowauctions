@@ -3,6 +3,9 @@ Description=Periodically pull auction data
 
 [Service]
 Type=simple
+Environment="WOW_AUCTION_CLIENT_ID="
+Environment="WOW_AUCTION_CLIENT_SECRET="
+Environment="WOW_AUCTION_DB_PATH="
 User=amas
 ExecStart=
 
